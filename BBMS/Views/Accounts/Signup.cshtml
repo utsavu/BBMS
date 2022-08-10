@@ -1,0 +1,99 @@
+﻿@model BBMS.Models.SignupModel
+
+@{
+    ViewData["Title"] = "Signup";
+}
+
+<h1>Signup</h1>
+
+<hr />
+<style>
+    .imgs{
+        width:400px;
+       margin-right:100px;
+      
+    }
+</style>
+
+    <img class="imgs" align="right" src="https://repository-images.githubusercontent.com/355386280/84e794f4-743a-42c6-932f-aeee6977481c"
+     height="300" alt="Image">
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Signup">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="UserId" class="control-label"></label>
+                <input asp-for="UserId" class="form-control" />
+                <span asp-validation-for="UserId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Age" class="control-label"></label>
+                <input asp-for="Age" class="form-control" />
+                <span asp-validation-for="Age" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" type="email" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="City" class="control-label"></label>
+                <input asp-for="City" class="form-control" />
+                <span asp-validation-for="City" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password" class="control-label"></label>
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BloodGroup" class="control-label"></label></br>
+                @Html.DropDownListFor(model=>model.BloodGroup,new SelectList(ViewBag.list),"----Select Your Blood Group----",htmlAttributes:new{@class="form-control"})
+                <span asp-validation-for="BloodGroup" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-4">
+                <input type="submit" value="Create" class="btn btn-danger " />
+            </div>
+            <div class="form-group mt-3">
+    <a href="~/Accounts/Login">Already Have Account LogIn Here</a>
+</div>
+
+           
+        </form>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+@{
+    try
+    {
+        if(TempData["status"]!=null)
+        {
+            if (TempData["status"] == "1")
+            {
+                <script>
+                    swal("Your Signup is Successfull!", "Please Login!", "success");
+                </script>
+            }
+            else
+            {
+                 <script>
+                    swal("Unable to Signup!", "Please Try Again!", "error");
+                </script>
+            }
+        }
+    }
+    catch
+    {
+        
+    }
+}

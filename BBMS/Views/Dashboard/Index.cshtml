@@ -1,0 +1,83 @@
+﻿<div class="container mb-5">
+    <a href="~/Dashboard/Add" class="btn btn-danger">Add Donor</a>
+</div>
+
+<h1 class='mt-4'>List Of Blood Donors</h1>
+
+<div class="container">
+    <table class="table table-bordered table-hover">
+        <tr class="bg-danger text-white">
+            <th>DonorId</th>
+            <th>Name</th>
+            <th>BloodGroup</th>
+            <th>Age</th>
+            <th>City</th>
+            <th>PhoneNo</th>
+            <th>Actions</th>
+        </tr>
+        @{
+            try
+            {
+                if(TempData["Donor"]!=null)
+                {
+                    foreach(var x in (List<BBMS.Models.Donor>)TempData["Donor"])
+                    {
+                        <tr>
+                        <td>@x.DonorId</td>
+                        <td>@x.Name</td>
+                        <td>@x.BloodGroup</td>
+                        <td>@x.Age</td>
+                        <td>@x.City</td>
+                        <td>@x.PhoneNo</td>
+                        <td>
+                        <a href="~/Dashboard/Edit?id=@x.DonorId" class="btn btn-warning">Edit</a>
+
+                         <a href="~/Dashboard/Delete?id=@x.DonorId" class="btn btn-danger" style="margin-left:3%">Delete</a>
+                        </td>
+                         </tr>
+                    }
+                }
+            }
+            catch
+            {
+                
+            }
+        }
+    </table>
+
+</div>
+
+
+
+@{
+    try
+    {
+        if(TempData["EditMsg"] !=null)
+        {
+              <script>
+                swal("Good job!", "Data Updated Sucecssfully!", "success");
+           </script>
+        }
+    }
+    catch
+    {
+        
+    }
+}
+
+@{
+    try
+    {
+        if(TempData["DeleteMsg"] !=null)
+        {
+              <script>
+                swal("Good job!", "Data Deleted Sucecssfully!", "success");
+           </script>
+        }
+    }
+    catch
+    {
+        
+    }
+}
+

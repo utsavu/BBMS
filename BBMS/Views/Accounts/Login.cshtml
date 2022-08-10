@@ -1,0 +1,76 @@
+﻿@model BBMS.Models.LoginModel
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<h1>Login</h1>
+
+
+<hr />
+<style>
+    .imgs{
+        width:max-content;
+       padding-right:75px;
+      
+    }
+</style>
+
+    <img class="imgs" align="right" src="https://repository-images.githubusercontent.com/355386280/84e794f4-743a-42c6-932f-aeee6977481c"
+     height="250" alt="Image">
+
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Login">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group mt-3">
+                <label asp-for="UserId" class="control-label"></label>
+                <input asp-for="UserId" class="form-control" />
+                <span asp-validation-for="UserId" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-3">
+                <label asp-for="Password" class="control-label"></label>
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-3">
+                <input type="submit" value="Login" class="btn btn-danger" />
+            </div>
+            <div class="form-group mt-3">
+            <a  href="~/Accounts/Signup">New Here...Click Here to Signup</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+@{
+    try
+    {
+        if(TempData["Msg"] !=null)
+        {
+            if(TempData["Msg"] == "1")
+            {
+               
+            }
+            else
+            {
+                <script>
+                swal("Error", "Incorrect UserName/Password", "error");
+                </script>
+            }
+        }
+    }
+    catch
+    {
+        
+    }
+}
